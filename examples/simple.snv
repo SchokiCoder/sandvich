@@ -1,0 +1,18 @@
+# The curly braces might imply that you can set them all willy nilly... but no.
+# "fn function_name(param: type) {" is the set syntax.
+# One indentation and then at the end,
+# revert the indent and one "}"
+fn main() {
+	
+	# If a constant's name contains lower case letters, issue warning.
+	const MYCONST = 42
+	
+	let mystr: str = "I survived the crystalling!"
+	let longstr = "I am\
+		a\
+		very\
+		veery\
+		long string~"
+	
+	print("Hello world!\n", mystr)
+}

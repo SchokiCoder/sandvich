@@ -1,0 +1,10 @@
+{
+	-dev syntax			.
+		-generics			?
+		-rewrite some		.
+		 script in snv
+	
+	-parser				.
+	
+	-jit/interpreter	.
+}
