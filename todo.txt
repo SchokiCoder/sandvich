@@ -1,10 +1,19 @@
 {
 	-dev syntax			.
 		-generics			?
+		-type system		.
+		-casting sys		.
+		-error sys			.
 		-rewrite some		.
 		 script in snv
+	
+	-editor support		.
 	
 	-parser				.
 	
 	-jit/interpreter	.
+	
+	-c api for			.
+	 embedding
+	-formatting tool	.
 }
