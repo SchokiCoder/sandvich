@@ -31,6 +31,7 @@ and ended with **>#**.
 - bool
 - str
 - arr
+- any
 
 ### Implementation
 

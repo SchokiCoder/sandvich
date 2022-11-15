@@ -1,0 +1,13 @@
+[package]
+name = "snv"
+version.workspace = true
+authors.workspace = true
+repository.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+snvc = { path = "../snvc" }
+snvi = { path = "../snvi" }
+

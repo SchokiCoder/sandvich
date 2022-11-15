@@ -1,19 +1,50 @@
 {
-	-dev syntax			.
-		-generics			?
-		-type system		.
-		-casting sys		.
-		-error sys			.
-		-rewrite some		.
-		 script in snv
+	-basic arithmetics ops	.
+	 (test implementation
+	  +, -, *, /)
+		-parser					.
+		 "snv"
+		 (cl-interface to
+		 lib "snvp")
+		 
+		-bytecode compiler		.
+		 "snvc" (lib)
+		 
+		-interpreter			.
+		 "snvi" (lib)
+		 
+		-repl					.
+		 "snv" (no args)
 	
-	-editor support		.
+	-enhanced arith			.
+	 (), %
+		-snv					.
+		-snvc					.
+		-snvi					.
 	
-	-parser				.
+	-dev syntax				.
+		-generics				?
+		-casting sys			.
+		-error sys				.
+		-ffi to rust			.
+		-rewrite some			.
+		 script in snv as
+		 test
 	
-	-jit/interpreter	.
+	-editor support			.
+		-vim/nvim				.
+		-nano					.
+		-gedit					.
 	
-	-c api for			.
+	-parser					.		
+	-aot -> bytecode		.	
+	-interpreter			.
+	
+	-cli repl				.
+	
+	-rust api for			.
 	 embedding
-	-formatting tool	.
+	-c api for				?
+	 embedding
+	-formatting tool		.
 }
