@@ -1,5 +1,5 @@
 /*
-	The Sandvich programming language and all contained packages
+	The Sandvich programming language
 	Copyright (C) 2022	Andy Frank Schoknecht
 
 	This program is free software: you can redistribute it and/or modify
@@ -15,3 +15,11 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+
+#include <parse.h>
+
+struct ParseFile ParseFile_parse()
+{}
+
+void ParseFile_clear(ParseFile *self)
+{}
