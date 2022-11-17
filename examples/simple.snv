@@ -5,11 +5,11 @@ fn main() {
 	const MYCONST = 42
 	
 	var mystr: str = "I survived the crystalling!"
-	var longstr = "I am\
-		a\
-		very\
-		veery\
-		long string~"
+	var longstr = "I am" +
+		"a" +
+		"very" +
+		"veery" +
+		"long string~"
 	
 	print("Hello world!\n", mystr)
 }

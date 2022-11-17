@@ -1,4 +1,9 @@
 {
+	-snvf
+	 the formatting tool
+}
+
+{
 	-basic arithmetics ops	.
 	 (test implementation
 	  +, -, *, /)

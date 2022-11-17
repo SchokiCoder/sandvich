@@ -1,9 +1,10 @@
 # Goal
 
 Embeddable scripting language:
+
 - simple
-- readable
 - correct
+- readable
 - fast
 
 # Target
