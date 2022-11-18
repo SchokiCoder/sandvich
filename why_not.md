@@ -60,6 +60,7 @@ Actually in Rust i could get C-like enums with this:
 
 With this i can do everything that a C-enum can do,  
 plus now i can precisely restrict the size of my enum in bytes.  
+Also the names are neatly organized in my namespace.
 
 This is all important for the bytecode.  
 I would have needed a way of converting integers (read from the bytecode file)

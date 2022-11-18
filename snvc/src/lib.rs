@@ -15,18 +15,3 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-
-use snvp::*;
-
-fn main() {
-	// example code
-	let code = "1 + 5";
-	
-	// parse
-	let mut parser = Parser::new();
-	parser.parse_file("main", code);
-	
-	// compile to bytecode
-	
-	// interpret bytecode
-}
