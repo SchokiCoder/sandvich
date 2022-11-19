@@ -117,6 +117,6 @@ After the return type, within curly braces comes the code.
 
 ### Keywords
 
-- _private_ (default, no keyword exists)
+- private
 - readonly (only mutable from inside the struct)
-- pub
+- pub (default, keyword is optional)

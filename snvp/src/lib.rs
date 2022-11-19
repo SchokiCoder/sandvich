@@ -31,11 +31,11 @@ pub mod parse_error_kind {
 }
 
 pub struct ParseError {
-	kind: parse_error_kind::ParseErrorKind,
-	row_begin: usize,
-	col_begin: usize,
-	row_end: usize,
-	col_end: usize,
+	pub kind: parse_error_kind::ParseErrorKind,
+	pub row_begin: usize,
+	pub col_begin: usize,
+	pub row_end: usize,
+	pub col_end: usize,
 }
 
 impl ParseError {
@@ -58,9 +58,9 @@ impl ParseError {
 }
 
 pub struct SrcFile {
-	name: String,
+	pub name: String,
 	//variables: Vec<>,
-	errors: Vec<ParseError>,
+	pub errors: Vec<ParseError>,
 }
 
 impl SrcFile {
@@ -73,7 +73,7 @@ impl SrcFile {
 }
 
 pub struct Parser {
-	files: Vec<SrcFile>,
+	pub files: Vec<SrcFile>,
 }
 
 impl Parser {
@@ -132,7 +132,7 @@ impl Parser {
 					'+' | '-' | '*' | '/' => {
 						words.push(&src[begin..i]);
 						cur_is_word = false;
-						continue
+						continue;
 					},
 					
 					' ' | '\t' => {
@@ -173,7 +173,7 @@ impl Parser {
 						words.push(&src[i..i]);
 					},
 					
-					' ' | '\t' => (),
+					' ' | '\t' => {},
 					
 					_ => {
 						// unexpected symbol, error
@@ -200,7 +200,9 @@ impl Parser {
 		}
 		
 		// parse words
-		panic!("impl me");
+		for word in words {
+			println!("{}", word);
+		}
 		
 		return Ok(());
 	}
