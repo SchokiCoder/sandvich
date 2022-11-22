@@ -1,5 +1,5 @@
 /*
-	The Sandvich programming language and all contained packages
+	The Sandvich programming language
 	Copyright (C) 2022	Andy Frank Schoknecht
 
 	This program is free software: you can redistribute it and/or modify
@@ -79,7 +79,7 @@ impl ByteProgram {
                 "+" => {
                     result.seq.push(
                         ByteStatement::new_arith(
-                            ByteCommand::Add,
+                            byte_cmd::ADD,
                             0,
                             words[i + 1].parse::<i64>().unwrap()
                         )
@@ -89,7 +89,7 @@ impl ByteProgram {
                 "-" => {
                     result.seq.push(
                         ByteStatement::new_arith(
-                            ByteCommand::Sub,
+                            byte_cmd::SUB,
                             0,
                             words[i + 1].parse::<i64>().unwrap()
                         )
@@ -99,7 +99,7 @@ impl ByteProgram {
                 "*" => {
                     result.seq.push(
                         ByteStatement::new_arith(
-                            ByteCommand::Mul,
+                            byte_cmd::MUL,
                             0,
                             words[i + 1].parse::<i64>().unwrap()
                         )
@@ -109,7 +109,7 @@ impl ByteProgram {
                 "/" => {
                     result.seq.push(
                         ByteStatement::new_arith(
-                            ByteCommand::Div,
+                            byte_cmd::DIV,
                             0,
                             words[i + 1].parse::<i64>().unwrap()
                         )
@@ -127,7 +127,7 @@ impl ByteProgram {
         // exec every statement
         for stmt in &self.seq {
             match stmt.cmd {
-                ByteCommand::Add => {
+                byte_cmd::ADD => {
                     let dest = match stmt.vals[0] {
                         ByteValue::Variable(var) => var,
                         
@@ -145,7 +145,7 @@ impl ByteProgram {
                     self.vars[dest] += val;
                 },
 				
-				ByteCommand::Sub => {
+				byte_cmd::SUB => {
                     let dest = match stmt.vals[0] {
                         ByteValue::Variable(var) => var,
                         
@@ -163,7 +163,7 @@ impl ByteProgram {
                     self.vars[dest] -= val;
                 },
 				
-				ByteCommand::Mul => {
+				byte_cmd::MUL => {
                     let dest = match stmt.vals[0] {
                         ByteValue::Variable(var) => var,
                         
@@ -181,7 +181,7 @@ impl ByteProgram {
                     self.vars[dest] *= val;
                 },
 				
-				ByteCommand::Div => {
+				byte_cmd::DIV => {
                     let dest = match stmt.vals[0] {
                         ByteValue::Variable(var) => var,
                         
@@ -198,18 +198,22 @@ impl ByteProgram {
                     
                     self.vars[dest] /= val;
                 },
+				
+				_ => {
+					panic!("unknown operation index given");
+				},
             }
         }
     }
 }
 
 struct ByteStatement {
-    cmd: ByteCommand,
+    cmd: byte_cmd::ByteCommand,
     vals: Vec<ByteValue>,
 }
 
 impl ByteStatement {
-    pub fn new_arith(cmd: ByteCommand, var_index: usize, val: i64) -> ByteStatement {
+    pub fn new_arith(cmd: byte_cmd::ByteCommand, var_index: usize, val: i64) -> ByteStatement {
         return ByteStatement {
             cmd: cmd,
             vals: vec![ByteValue::Variable(var_index), ByteValue::Value(val)],
@@ -222,62 +226,14 @@ enum ByteValue {
     Variable(usize),    // index into var register
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Problem:
-I can't have an enum like in c,
-where i can cast int to enum and vice versa,
-which is what I NEED for saving muh bytes to file!
-
-enum ByteCommand {
-	Add = 1,
-	Sub = 2,
-	Mul = 3,
-	Div = 4,
+mod byte_cmd {
+	pub type ByteCommand = u32;
+	
+	pub const ADD: ByteCommand = 1;
+	pub const SUB: ByteCommand = 2;
+	pub const MUL: ByteCommand = 3;
+	pub const DIV: ByteCommand = 4;
 }
-
-Fix:
-Use C or Asm, at least for the part:
--int to enum
-
-Enum to int works flawlessly in rust.
-File read and write is also still done by rust!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 fn main() {
 	speed::direct_interp();
@@ -376,3 +332,4 @@ fn speed_rust() {
     println!("native took {} nanos", elapsed_native);
 }
 */
+

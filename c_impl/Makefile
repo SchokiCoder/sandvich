@@ -1,18 +1,20 @@
-PKG_NAME="Sandvich"
-PKG_AUTHOR="Andy Frank Schoknecht <afschoknecht@gmail.com>"
+PKG_NAME = "Sandvich"
+PKG_AUTHOR = "Andy Frank Schoknecht <afschoknecht@gmail.com>"
 PKG_REPOSITORY = "https://github.com/SchokiCoder/sandvich"
-PKG_LICENSE="GPLv3"
-PKG_VERSION_MAJOR=0
-PKG_VERSION_MINOR=0
-PKG_VERSION_PATCH=0
+PKG_LICENSE = "GPLv3"
+PKG_VERSION_MAJOR = 0
+PKG_VERSION_MINOR = 0
+PKG_VERSION_PATCH = 0
 
+MAKE = make
+CC = cc
+CFLAGS = -ansi -pedantic -Wall -Wextra
 
-CC=cc
-CFLAGS="-ansi -pedantic -Wall -Wextra"
+OUTDIR = ./bin
 
-snvp:
-	$(CC) $(CFLAGS) -c -fPIC "$@/src/*.c"
-	$(CC) -o $@ -shared "$@/src/*.o"
+#snvp: snvp/src/*.c
+#	$(CC) $(CFLAGS) -c -fPIC $^
+#	$(CC) -o $@ -shared lib$@.so
 
 #snvc:
 
@@ -26,3 +28,9 @@ snvp:
 
 #remove:
 
+snv_test_bco.o: ./snv_test/snv_test_bco.c ./snv_test/snv_test_bco.h ./snv_test/snv_test_bool.h
+	$(CC) $(CFLAGS) -o $(OUTDIR)/$@ -g -c ./snv_test/snv_test_bco.c
+
+snv_test: ./bin/snv_test_bco.o ./snv_test/snv_test.c ./snv_test/snv_test_bool.h
+	$(CC) $(CFLAGS) -o $(OUTDIR)/$@ -g ./snv_test/snv_test.c ./bin/snv_test_bco.o
+	
