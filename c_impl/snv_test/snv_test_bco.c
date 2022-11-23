@@ -20,10 +20,7 @@
 #include <stdlib.h>
 #include "snv_test_bco.h"
 
-/*
-	the parameters can be swapped, without the user noticing :/
-*/
-long BCO_op_exec( const BCO_op op, const long a, const long b )
+snvint_t BCO_op_exec( const BCO_op op, const snvint_t a, const snvint_t b )
 {
 	switch (op)
 	{
@@ -56,10 +53,12 @@ struct BCO_obj BCO_obj_compile( char *src )
 	size_t i;
 	bool run = TRUE;
 	struct BCO_obj result;
+	bool operation_buffered = TRUE;
 	BCO_op operation = BCO_OP_ADD;
 	bool is_collecting = FALSE;
 	char *number_begin;
 	char temp;
+	bool number_buffered = FALSE;
 	snvint_t number;
 	
 	result.count_ints = 1;
@@ -92,25 +91,29 @@ struct BCO_obj BCO_obj_compile( char *src )
 			
 			case '+':
 				operation = BCO_OP_ADD;
-				goto step_add;
+				operation_buffered = TRUE;
+				goto end_collecting;
 			
 			case '-':
 				operation = BCO_OP_SUB;
-				goto step_add;
+				operation_buffered = TRUE;
+				goto end_collecting;
 			
 			case '*':
 				operation = BCO_OP_MUL;
-				goto step_add;
+				operation_buffered = TRUE;
+				goto end_collecting;
 			
 			case '/':
 				operation = BCO_OP_DIV;
-				goto step_add;
+				operation_buffered = TRUE;
+				goto end_collecting;
 			
 			case '\0':
 				run = FALSE;
-				goto step_add;
+				goto end_collecting;
 				
-			case ' ': step_add:
+			case ' ': end_collecting:
 				if (is_collecting == TRUE)
 				{
 					/* stop collecting number */
@@ -119,24 +122,30 @@ struct BCO_obj BCO_obj_compile( char *src )
 					/* convert collected number into actual int */
 					temp = src[i];
 					src[i] = '\0';
-					
 					number = atol(number_begin);
-
 					src[i] = temp;
-
-					/* add new statement */
-					result.stmts[result.count_stmts].operation = operation;
-					result.stmts[result.count_stmts].a.is_index = TRUE;
-					result.stmts[result.count_stmts].a.integer.index = 0;
-					result.stmts[result.count_stmts].b.is_index = FALSE;
-					result.stmts[result.count_stmts].b.integer.value = number;
-					result.count_stmts++;
+					
+					number_buffered = TRUE;
 				}
 				break;
 			
 			default:
 				printf("ERROR: invalid character (%c) received\n", src[i]);
 				break;
+		}
+		
+		/* if operation is in buffer */
+		if (operation_buffered == TRUE && number_buffered == TRUE)
+		{
+			/* add new statement */
+			result.stmts[result.count_stmts].operation = operation;
+			result.stmts[result.count_stmts].a.is_index = TRUE;
+			result.stmts[result.count_stmts].a.integer.index = 0;
+			result.stmts[result.count_stmts].b.is_index = FALSE;
+			result.stmts[result.count_stmts].b.integer.value = number;
+			result.count_stmts++;
+			operation_buffered = FALSE;
+printf("op: %i\nnum: %li\n", operation, number);
 		}
 	}
 

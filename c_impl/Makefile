@@ -12,6 +12,10 @@ CFLAGS = -ansi -pedantic -Wall -Wextra
 
 OUTDIR = ./bin
 
+info:
+	@echo "Hi :)"
+	@echo "pls define a target"
+
 #snvp: snvp/src/*.c
 #	$(CC) $(CFLAGS) -c -fPIC $^
 #	$(CC) -o $@ -shared lib$@.so
@@ -31,6 +35,8 @@ OUTDIR = ./bin
 snv_test_bco.o: ./snv_test/snv_test_bco.c ./snv_test/snv_test_bco.h ./snv_test/snv_test_bool.h
 	$(CC) $(CFLAGS) -o $(OUTDIR)/$@ -g -c ./snv_test/snv_test_bco.c
 
-snv_test: ./bin/snv_test_bco.o ./snv_test/snv_test.c ./snv_test/snv_test_bool.h
+snv_test: snv_test_bco.o ./snv_test/snv_test.c ./snv_test/snv_test_bool.h
 	$(CC) $(CFLAGS) -o $(OUTDIR)/$@ -g ./snv_test/snv_test.c ./bin/snv_test_bco.o
-	
+
+clear:
+	rm ./bin/*

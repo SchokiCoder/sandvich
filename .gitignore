@@ -1,2 +1,5 @@
 /target
 /Cargo.lock
+/c_imp/bin
+/bin
+*.o

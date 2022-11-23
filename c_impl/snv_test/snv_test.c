@@ -26,7 +26,7 @@
 	If you change the code,
 	DO ALSO change the manually converted c code !!!
 */
-const char *CODE = "1 + 2 / 3 * 4 - 5 + 11 * 2 - 4 / 8 - 1";
+const char *CODE = "1*3 / 3 + 1 - 1";/*"1 + 2 / 3 * 4 - 5 + 11 * 2 - 4 / 8 - 1";*/
 
 const snvint_t SOLUTION = 1;
 
@@ -102,7 +102,7 @@ int main()
 {
 	/*SPD_interpret();*/
 	SPD_bco_all();
-	SPD_bco_execonly();
+	/*SPD_bco_execonly();*/
 	SPD_nativec();
 	
 	return 0;
