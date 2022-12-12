@@ -1,55 +1,80 @@
 {
-	-snvf
-	 the formatting tool
+        -snvf
+         the formatting tool
 }
 
 {
-	-basic arithmetics ops	.
-	 (test implementation
-	  +, -, *, /)
-		-parser					.
-		 "snv"
-		 (cl-interface to
-		 lib "snvp")
-		 
-		-bytecode compiler		.
-		 "snvc" (lib)
-		 
-		-interpreter			.
-		 "snvi" (lib)
-		 
-		-repl					.
-		 "snv" (no args)
-	
-	-enhanced arith			.
-	 (), %
-		-snv					.
-		-snvc					.
-		-snvi					.
-	
-	-dev syntax				.
-		-generics				?
-		-casting sys			.
-		-error sys				.
-		-ffi to rust			.
-		-rewrite some			.
-		 script in snv as
-		 test
-	
-	-editor support			.
-		-vim/nvim				.
-		-nano					.
-		-gedit					.
-	
-	-parser					.		
-	-aot -> bytecode		.	
-	-interpreter			.
-	
-	-cli repl				.
-	
-	-rust api for			.
-	 embedding
-	-c api for				?
-	 embedding
-	-formatting tool		.
+        -c_impl::bco::h                 .
+         fix long -> snvint_t
+        
+        -do i need my own language or   .
+         can i just write an
+         interpreter for another
+         language with types
+        
+        -basic arithmetics ops          .
+         (test implementation
+          +, -, *, /)
+        -parser "snv"                           .
+         (cl-interface to lib "snvp")
+                 
+        -bytecode compiler "snvc"               .
+         (lib)
+                 
+        -interpreter "snvi"                     .
+         (lib)
+                 
+        -main app "snv"                         .
+         (REPL when no args)
+        
+        -enhanced arith                         .
+         (), %
+                -snv                                    .
+                -snvc                                   .
+                -snvi                                   .
+        
+        -dev syntax                             .
+                -generics                               ?
+                -casting sys                            .
+                -error sys                              .
+                -ffi to rust                            .
+                -rewrite some                           .
+                 script in snv as
+                 test
+        
+        -editor support                         .
+                -vim/nvim                               .
+                -nano                                   .
+                -gedit                                  .
+        
+        -parser                                 .
+        -aot -> bytecode                        .
+        -interpreter                            .
+        
+        -cli repl                               .
+        
+        -rust api for                           .
+         embedding
+        -c api for                              ?
+         embedding
+        -formatting tool                        .
 }
+
+{
+	-check for linter of known languages		.
+	 (the 3 main problems need to be caught)
+		-python						?
+		-lua						?
+	
+	-if previous is true				.
+		-relicense under gplv2				.
+		-mark snv as deprecated				.
+		-archive snv					.
+	-else						.
+		-fork other lang				.
+			-add optional type hints			.
+			-add declaration hint				.
+			-add constant hint				.
+			-(fork and) write linter			.
+}
+
