@@ -76,5 +76,6 @@
 			-add declaration hint				.
 			-add constant hint				.
 			-(fork and) write linter			.
+			-make static linking possible			.
 }
 
